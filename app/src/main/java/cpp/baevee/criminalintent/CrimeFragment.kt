@@ -3,6 +3,7 @@ package cpp.baevee.criminalintent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -71,9 +72,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
                 start: Int,
                 count: Int,
                 after: Int
-            ) {
-
-            }
+            ) {}
             override fun onTextChanged(
                 sequence: CharSequence?,
                 start: Int,
@@ -82,9 +81,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
             ) {
                 crime.title = sequence.toString()
             }
-            override fun afterTextChanged(sequence: Editable?) {
-
-            }
+            override fun afterTextChanged(sequence: Editable?) {}
         }
         titleField.addTextChangedListener(titleWatcher)
 
@@ -114,7 +111,7 @@ class CrimeFragment : Fragment(), DatePickerFragment.Callbacks {
 
     private fun updateUI() {
         titleField.setText(crime.title)
-        dateButton.text = crime.date.toString()
+        dateButton.text = DateFormat.format("EEEE, MMM dd, yyyy", crime.date).toString()
         solvedCheckBox.apply {
             isChecked = crime.isSolved
             jumpDrawablesToCurrentState()
